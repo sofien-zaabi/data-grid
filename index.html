@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>DataGrid demo</title>
+  </head>
+  <body>
+    <div id="app">
+      <table id="testGridId" class="table"></table>
+      <table id="testGrid2Id" class="table" style="margin-top: 20px"></table>
+    </div>
+
+    <!-- plugin initialization -->
+     <script type="text/javascript" src="./ehematosTable.js"></script>
+    <script>
+      let testGrid, testGrid2;
+      document.addEventListener("DOMContentLoaded", function() {
+        let gridTest2Columns = [
+            {
+              title: 'ID',
+               data: 'id'
+            },
+            {
+              title: 'Post ID', 
+              data: 'postId', 
+              editable: true, 
+              editType: 'text', 
+              editAttrs: {class: 'custom-input'}, 
+              dataInit: function(elem){
+                console.log(elem.id + " init ", elem.value)
+              }, 
+              events: [
+                {
+                  type: 'onfocus',
+                  fn: function(event) {
+                    console.log(this.id + ' onfocus ' , this.value)
+                  }
+                },
+                {
+                  type: 'onchange',
+                  fn: function(event) {
+                    console.log(this.id + ' onchange ' , this.value)
+                  }
+                },
+                {
+                  type: 'onblur',
+                  fn: function(event) {
+                    console.log(this.id + ' onblur ' , this.value)
+                  }
+                }
+              ]
+            },
+            {
+              title: 'Name', 
+              data: 'name', 
+              editable: true,
+              editType: 'select',
+              selectOptions: [
+                {
+                  key: 'Yes',
+                  value: true
+                },
+                {
+                  key: 'No',
+                  value: false
+                }
+              ], 
+              editAttrs: {class: 'custom-select'}, 
+              dataInit: function(elem){
+                console.log(elem.id + " init ", elem.value)
+              }, 
+              events: [
+                {
+                  type: 'onfocus',
+                  fn: function(event) {
+                    console.log(this.id + ' onfocus ' , this.value)
+                  }
+                },
+                {
+                  type: 'onchange',
+                  fn: function(event) {
+                    console.log(this.id + ' onchange ' , this.value)
+                  }
+                },
+                {
+                  type: 'onblur',
+                  fn: function(event) {
+                    console.log(this.id + ' onblur ' , this.value)
+                    //testGrid.setSelection(this.closest('tr').rowIndex);
+                  }
+                }
+              ]
+            },
+            {
+              title: 'Email', 
+              data: 'email', 
+              editable: true,
+              editType: 'checkbox',
+              dataInit: function(elem){
+                console.log(elem.id + " init ", elem.value)
+              }, 
+              events: [
+                {
+                  type: 'onfocus',
+                  fn: function(event) {
+                    console.log(this.id + ' onfocus ' , this.value)
+                  }
+                },
+                {
+                  type: 'onchange',
+                  fn: function(event) {
+                    console.log(this.id + ' onchange ' , this.value)
+                  }
+                },
+                {
+                  type: 'onblur',
+                  fn: function(event) {
+                    console.log(this.id + ' onblur ' , this.value)
+                    //testGrid.setSelection(this.closest('tr').rowIndex);
+                  }
+                }
+              ]
+            },
+            {title: 'Body', data: 'body' ,render: thumbnail}
+        ];
+        testGrid = new DataGrid({
+          id : 'testGridId',
+          ajax : {
+            url : 'https://jsonplaceholder.typicode.com/comments'
+          },
+          columns : gridTest2Columns,
+          order : true,
+          editRow : false,
+          editable : true,
+          selectRow : true,
+          scrollY : true,
+          height : '400px'
+        });
+        let gridTestColumns = [
+      {title: 'ID', data: 'id'},
+      {title: 'Post ID', data: 'postId'},
+      {title: 'Name', data: 'name'},
+      {title: 'Emain', data: 'email'},
+      {title: 'Body', data: 'body'}
+  ];
+        /* setTimeout(function() {testGrid2 = new EhematosTable({
+          id : 'testGrid2Id',
+          ajax : {
+            url : 'https://jsonplaceholder.typicode.com/photos'
+          },
+          columns : gridTestColumns,
+          order : true,
+          selectRow : true,
+          scroll : true,
+          height : '300px'
+        });
+      }, 20000); */
+      });
+      function thumbnail(data) {
+          return '<div onkeydown="console.log('+ data +')"><button type ="button" onload="alert(' + data + ')">' + data + '</button><script>alert(' + data + ')</div>'
+      }
+    </script>
+  </body>
+</html>
