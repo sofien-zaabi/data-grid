@@ -1,6 +1,7 @@
-import {drawRows} from '../utils/dom/drawRows';
+import {updateRows} from '../utils/dom/updateRows';
 
 export const reloadGrid = function(data, numero) {
+    const prevDataArray = Array.from(this.dataSet);
     this.dataSet = data;
     if (this.options.order && this.options.order.targetColumn) {
         var column = this.options.columns.filter(col => col == this.options.order.targetColumn)[0];
@@ -13,5 +14,5 @@ export const reloadGrid = function(data, numero) {
             //this.dataSet.sort(compareValues(this.option.columns[keyIndex].data, this.option.order.orderType));
         }
     }
-    drawRows.call(this,numero);
+    updateRows.call(this,prevDataArray, numero);
 }

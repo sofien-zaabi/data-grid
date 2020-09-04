@@ -99,7 +99,8 @@ const appenChild = (child, elem) => {
 export const setAttrs = (elem, attrs) => {
   if(elem) {
     for (let key in attrs) {
-      elem.setAttribute(key, attrs[key])
+      if(attrs[key])
+        elem.setAttribute(key, attrs[key])
     }
   }
 }

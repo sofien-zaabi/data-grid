@@ -7,7 +7,7 @@ import CustomEvent from '../utils/polyfills/customEvent';
 
 export const insertRow = function(rowData, rowIndex) {
     let row;
-    if(rowData && typeof rowData === 'object') {
+    if(typeof rowData === 'object') {
         let docFrag  = document.createDocumentFragment();
         let propIndex = 0;
         if(Object.keys(rowData).length === this.options.columns.length) {

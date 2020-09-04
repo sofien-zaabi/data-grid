@@ -1,6 +1,6 @@
 
 
-import { drawRows } from '../dom/drawRows';
+import { updateRows } from '../dom/updateRows';
 import { compareValues } from '../compareValues';
 import * as dom from '../dom/domUtils';
 import { gridClasses } from '../gridClasses';
@@ -9,6 +9,7 @@ import {resetSelection} from '../../methods/resetSelection';
 export const colSortEvent = function (element) {
 	//console.log('sortAttachListener ' + element + ' ' + thisObject.options.id);
 	let that = this;
+	const prevDataArray = Array.from(this.dataSet);
 	if (element) {
 		element.addEventListener("click", function (event) {
 			let target = event.target || this;
@@ -54,7 +55,7 @@ export const colSortEvent = function (element) {
 					}
 					// sortedColumn();
 				}
-				drawRows.call(that);
+				updateRows.call(that, prevDataArray);
 			}
 			
 
